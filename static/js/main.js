@@ -6,8 +6,8 @@ var recommendation = {
     init: function(){
         this.beers();
         $('#reward-btn').hide();
-        $('#step-2').hide();
-        $('#step-3').hide();
+        $('.step-2').hide();
+        $('.step-3').hide();
         $('#result').hide();
 
         $("#rec").submit(function(e) {
@@ -17,6 +17,7 @@ var recommendation = {
             recommendation.rewarded = false;
             e.preventDefault();
             recommendation.submit();
+            global.resize();
         });
 
         beers.forEach(function(beer){
@@ -24,26 +25,27 @@ var recommendation = {
         });
 
         $(".chosen-select").chosen({no_results_text: "Oops, nothing found!"});
-        $(".beer").click(function(){
+        $('.beer:not(.active)').on('click', function(){
             if (!recommendation.rewarded){
-                $(".beer").removeAttr('style');
-                $(this).css("background-color","green");
+                $(".beer.active").removeClass('active');
+                $(this).addClass('active');
                 var item_rank = $(this).attr('data-id');
-                $('#current-selection').text(item_rank);
+                $('#current-selection').val(item_rank);
                 $('#reward-btn').show();
-                $('#step-3').show();
+                $('.step-3').show();
+                global.resize();
             }
         });
 
-        $('#reward').submit(function(e){
+        $('#reward-btn').on('click', function(e){
             e.preventDefault();
             recommendation.rewarded = true;
             $("#reward-btn").text("Thanks!");
             $("#reward-btn").prop('disabled',true);
-            var item_num = $('#current-selection').text(),
-            id = $('#u-id').text();
-            $('#u-id').text('');
-            $('#current-selection').text('10');
+            var item_num = $('#current-selection').val(),
+            id = $('#u-id').val();
+            $('#u-id').val('');
+            $('#current-selection').val('10');
             try{
                 int_num = parseInt(item_num,10);
                 if (int_num > 9){
@@ -78,6 +80,7 @@ var recommendation = {
                                     ].join('');
                         $('#result').html(text);
                         $('#result').show();
+                        global.resize();
                     }
 
                 });
@@ -86,6 +89,7 @@ var recommendation = {
                             "<hr>Sorry an error occurred please retry your search"];
                 $('#result').html(text);
                 $('#result').show();
+                global.resize();
             }
         });
     },
@@ -124,23 +128,42 @@ var recommendation = {
                     $this_beer.find('.name').html(d.result[i].beer);
                     $this_beer.addClass('show');
                 }
-                Prism.highlightAll();
-                $('#u-id').text(d.uid);
-                $('#step-2').show();
+                $('#u-id').val(d.uid);
+                $('.step-2').show();
                 $('#result').hide().children('code').text('');
-                $(".beer").removeAttr('style');
+                $(".beer").removeClass('active');
+                setTimeout(function(){
+                    global.resize();
+                }, 300);
             }
         });
-
+        global.resize();
         return false;
     },
     reset: function(){
         $('.results p').removeClass('show');
         $('.beer').removeClass('show');
+         $(".beer").removeClass('active');
         $('#result').hide().children('code').text('');
+        global.resize();
+    }
+};
+
+var global = {
+    init: function(){
+        global.resize();
+
+
+        $(window).on('resize', function(){
+            global.resize();
+        });
+    },
+    resize: function(){
+        $('.jumbotron').css('min-height', $('body').height());
     }
 };
 
 $(document).ready(function(){
     recommendation.init();
+    global.init();
 });

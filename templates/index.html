@@ -3,69 +3,61 @@
     <head>
         <meta name="viewport" content="width=device-width">
         <title>Bandit Beer Recommender</title>
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
         <link href="{{ css_url }}" rel="stylesheet" type="text/css"></link>
     </head>
     <body>
-            <form>
-                <h1>ŷhat</h1>
-                <h1>Help us train our bandit algorithm</h1>
-                <h2>Or view it's current state <a href='/state' target="_blank">here</a></h2>
-            </form>
-            <div class="row">
-                <div class="col-sm-3">
-                    <div class="jumbotron">
-                        <h3>What is this?</h3>
-                        <p class="lead">This page is running a bandit algorithm to "intellegently"
-                                        test three versions of a beer recommender.</p>
-                        <p class="lead">Rather than randomly switching between each, your feedback
-                                        allows the algorithm to favor the best performing one.<p>
-                        <p class="lead">Read more about how this works on our blog, or stop by our site and say hello!</p>
-                        <p>
-                            <a class="btn btn-lg btn-success" href="http://blog.yhathq.com"
-                               role="button" target="_blank">Blog</a>
-                            <a class="btn btn-lg btn-success" href="http://yhathq.com" 
-                               role="button" target="_blank">ŷhat</a>
-                        </p>
-                    </div>
-                </div>
-                <div class="col-sm-9">
-                    <form class="title">
-                        <h3 id="step-1">Step 1: Search for a set of beers</h3>
-                    </form>
-                    <form id="rec">
-                        <select id="beers" data-placeholder="Choose some beers..." class="chosen-select" multiple>
-                        </select>
-                        <button class="btn" type="submit">Go!</button>
-                    </form>
-                    <form>
-                        <h3 id="step-2">(A recommender has been selected by the bandit)<br>
-                                        Step 2: Select the most relevant result</h3>
-                    </form>
-                    <form id="reward">
-                        <section class="results">
-                            <p class="lead">Top Ten Recommended Beers</p>
-                            <figure class="visualization row">
-                                <div class="col-sm-6 col-1"></div>
-                                <div class="col-sm-6 col-2"></div>
-                            </figure>
-                        </section>
-                        <p hidden id="current-selection"></p>
-                        <p hidden id="u-id"></p>
-                        <h3 id="step-3">Step 3: Submit feedback to the algorithm</h3>
-                        <button id="reward-btn" class="btn" type="submit">Submit beer choice</button>
-                    </form>
-                    <br>
-                    <form id="result">
-                    </form>
-                    <hr>
-                    <br><br><br>
-                    <br>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="jumbotron">
+                    <h2>ŷhat</h2>
+                    <h3>What is this?</h3>
+                    <p class="lead">This page is running a bandit algorithm to "intellegently"
+                                    test three versions of a beer recommender.</p>
+                    <p class="lead">Rather than randomly switching between each, your feedback
+                                    allows the algorithm to favor the best performing one.<p>
+                    <p class="lead">Read more about how this works on our blog, or stop by our site and say hello!</p>
+                    <p>
+                        <a class="btn btn-lg btn-success" href="http://blog.yhathq.com"
+                           role="button" target="_blank">Blog</a>
+                        <a class="btn btn-lg btn-success" href="http://yhathq.com"
+                           role="button" target="_blank">ŷhat</a>
+                    </p>
                 </div>
             </div>
-                <script src="{{ jquery_url }}"></script>
-                <script src="{{ highlight_url }}"></script>
-                <script src="{{ beers_url }}"></script>
-                <script src="{{ js_url }}"></script>
-            </body>
-        </html>
+            <div class="col-md-8">
+                <h3>Help us train our bandit algorithm</h3>
+                <h4>Or view it's current state <a href='/state' target="_blank">here</a></h4>
+                <div class="title">
+                    <p id="step-1" class="lead">Step 1: Search for a set of beers</p>
+                </div>
+                <form id="rec">
+                    <select id="beers" data-placeholder="Choose some beers..." class="chosen-select" multiple></select>
+                    <button class="btn" type="submit">Go!</button>
+                </form>
+                <div>
+                    <p class="step-2"><em><strong>A recommender has been selected by the bandit</strong></em></p>
+                    <p class="step-2 lead">Step 2: Select the most relevant result</p>
+                </div>
+                <div id="reward">
+                    <section class="results">
+                        <p><strong>Top Ten Recommended Beers</strong></p>
+                        <figure class="visualization row">
+                            <div class="col-sm-6 col-1"></div>
+                            <div class="col-sm-6 col-2"></div>
+                        </figure>
+                    </section>
+                    <input id="u-id" type="hidden"/>
+                    <input id="current-selection" type="hidden"/>
+                    <p class="step-3 lead">Step 3: Submit feedback to the algorithm</p>
+                    <button id="reward-btn" class="btn" type="submit">Submit beer choice</button>
+                </div>
+                <br/>
+                <div id="result"></div>
+            </div>
+        </div>
+        <script src="{{ jquery_url }}"></script>
+        <script src="{{ highlight_url }}"></script>
+        <script src="{{ beers_url }}"></script>
+        <script src="{{ js_url }}"></script>
+    </body>
+</html>
