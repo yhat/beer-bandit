@@ -1,5 +1,7 @@
 ## Beer Rec in `python`
 
+Webapp implementation of the epsilon-Greedy Algorithm which can be found running at [bandit.yhathq.com](http://bandit.yhathq.com)
+
 ### Quickstart
 
 ```bash
