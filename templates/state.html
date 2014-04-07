@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width">
+        <title>Bandit Beer Recommender</title>
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <link href="{{ css_url }}" rel="stylesheet" type="text/css"></link>
+    </head>
+    <body>
+                <div class="jumbotron">
+                    <h1>ŷhat Beer Recommender</h1>
+                    <p>View blog post <a href="http://blog.yhathq.com">here</a></p>
+                    <div class="jumbotron">
+                        <h3>State of the epsilon-Greedy Algorithm</h3>
+                        <table class="table">
+                            <tr>
+                                <th>Arm</th>
+                                <th>Name</th>
+                                <th>Count</th>
+                                <th>Value</th>
+                            </tr>
+                            {% for arm in state.arms %}
+                            <tr>
+                                <td>{{ arm.number }}</td>
+                                <td>{{ arm.name }}</td>
+                                <td>{{ arm.count }}</td>
+                                <td>{{ arm.value }}</td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                        <p>Current epsilon: <code>{{ state.epsilon }}</code></p>
+                    </div>
+                </div>
+            </div>
+                <script src="{{ jquery_url }}"></script>
+                <script src="{{ highlight_url }}"></script>
+                <script src="{{ beers_url }}"></script>
+                <script src="{{ js_url }}"></script>
+            </body>
+        </html>

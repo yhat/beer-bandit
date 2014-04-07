@@ -1,4 +1,11 @@
-beer-bandit
-===========
+## Beer Rec in `python`
 
-Flask app to run a bandit algorithm testing different beer recommenders
+### Quickstart
+
+```bash
+$ pip install -r requirements.txt
+$ python app.py
+```
+
+### The model
+[Download it here](http://nbviewer.ipython.org/gist/glamp/6108bb4df474f29eb6cb)
